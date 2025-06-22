@@ -5,23 +5,27 @@ import { DATABASE } from 'src/core/database/database.service';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { Schema } from 'src/core/database/schema';
 import { UserSchema } from './entities/user.entity';
+import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject(DATABASE)
     private readonly db: NodePgDatabase<Schema>,
-  ) {}
+  ) { }
 
   async create(createUserDto: CreateUserDto) {
-    this.db.insert(UserSchema);
+    const user = this.db.insert(UserSchema).values(createUserDto).returning();
+    return user
   }
 
-  findAll() {}
+  findAll() {
+    return this.db.select().from(UserSchema)
+  }
 
-  findOne(id: number) {}
+  findOne(id: number) { return this.db.select().from(UserSchema).where(eq(UserSchema.id, id)).limit(1)[0] }
 
-  findOneWithUsername(username: string) {}
+  findOneWithUsername(username: string) { return this.db.select().from(UserSchema).where(eq(UserSchema.username, username)).limit(1)[0] }
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
