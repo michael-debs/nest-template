@@ -2,10 +2,10 @@ import { Provider } from '@nestjs/common';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Client } from 'pg';
 
-export const DATABASE = 'DRIZZLE';   
+export const DATABASE = 'DRIZZLE';
 
 const client = new Client({
-  connectionString: "postgresql://root:root@localhost:5432/test",
+  connectionString: 'postgresql://root:root@localhost:5432/test',
 });
 
 export const DatabaseProvider: Provider = {
