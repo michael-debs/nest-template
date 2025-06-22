@@ -1,20 +1,18 @@
-// src/database/drizzle.provider.ts
 import { Provider } from '@nestjs/common';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Client } from 'pg';
-import * as schema from './schema'; // your drizzle schema
 
-export const DATABASE = 'DRIZZLE'; // injection token
+export const DATABASE = 'DRIZZLE';   
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: "postgresql://root:root@localhost:5432/test",
 });
 
 export const DatabaseProvider: Provider = {
   provide: DATABASE,
   useFactory: async () => {
     await client.connect();
-    const db = drizzle(client, { schema });
+    const db = drizzle(client);
     return db;
   },
 };
