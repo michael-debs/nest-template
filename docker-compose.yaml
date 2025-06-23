@@ -1,0 +1,9 @@
+services:
+  postgres:  # Renamed from mysql to postgres for clarity
+    image: postgres
+    container_name: nest_postgres_container
+    env_file:  
+      - .env
+    ports: 
+      - "5432:5432"
+    
