@@ -28,4 +28,9 @@ export class AuthController {
       throw new UnauthorizedException('invalid username or password');
     return this.authService.login(user);
   }
+
+  @Post('signin')
+  async signin(@Body() user) {
+    return this.authService.signin(user);
+  }
 }

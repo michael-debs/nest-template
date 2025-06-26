@@ -14,6 +14,7 @@ import { UsersModule } from 'src/modules/users/users.module';
   imports: [
     UsersModule,
     PassportModule,
+
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {
