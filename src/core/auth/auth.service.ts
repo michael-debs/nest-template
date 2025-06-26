@@ -12,6 +12,8 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneWithUsername(username);
+    console.log(user?.password);
+
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
