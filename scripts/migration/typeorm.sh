@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to your DataSource file
-DATASOURCE="data-source.ts"
+DATASOURCE="src/core/database/data-source.ts"
 
 # Function to show usage
 usage() {
@@ -17,8 +17,8 @@ COMMAND=$1
 ARG=$2
 
 # Ensure required tools are installed
-if ! command -v ts-node &> /dev/null; then
-  echo "❌ ts-node is not installed. Please run: npm install --save-dev ts-node"
+if [ ! -x "./node_modules/.bin/ts-node" ]; then
+  echo "❌ ts-node is not installed. Please run: pnpm install --save-dev ts-node"
   exit 1
 fi
 
