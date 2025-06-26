@@ -6,7 +6,7 @@ import dataSource from './data-source';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync(dataSource.options),
+    TypeOrmModule.forRoot(dataSource.options),
   ],
 })
 export class DatabaseModule {}
