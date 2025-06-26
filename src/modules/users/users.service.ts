@@ -3,34 +3,32 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { Users } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRep: Repository<User>,
+    @InjectRepository(Users) private readonly userRep: Repository<Users>,
   ) {}
 
   async create(user: CreateUserDto) {
-    this.userRep.save(user);
+    return this.userRep.save(user);
   }
 
   findAll() {
-    this.userRep.find();
+    return this.userRep.find();
   }
 
   findOneById(user_id: number) {
-    this.userRep.findOneBy({ id: user_id });
+    return this.userRep.findOneBy({ id: user_id });
   }
 
   findOneWithUsername(username: string) {
-    this.userRep.findOneBy({ username: username });
+    return this.userRep.findOneBy({ username: username });
   }
 
   update(user_id: number, user: UpdateUserDto) {
-    this.userRep.update({ id: user_id }, user);
-
-    return `This action updates a #${user_id} user`;
+    return this.userRep.update({ id: user_id }, user);
   }
 
   remove(user_id: number) {
